@@ -35,7 +35,7 @@ const randomDates = (min, max) => {
         month = '0' + month;
     }
     let year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;
-    let date = day + '/' + month + '/' + year;
+    let date = new Date(year, month - 1, day);
     return date;
 }
 
@@ -43,7 +43,7 @@ const randomDates = (min, max) => {
 for(let i = 0; i < 1000; i++){
     let id = uuidv4();
     let username = rug.generate();
-    let inscriptionDate = randomDates('01/01/2020', '31/01/2022');
+    let inscriptionDate = randomDates('01/01/2020', '31/12/2022');
     let hobbies = randomHobbies();
     let birthdayDate = randomDates('01/01/1960', '31/12/1990');
     let user = {id: id, username: username, inscriptionDate: inscriptionDate, birthdayDate: birthdayDate, hobbies: hobbies};
@@ -52,6 +52,20 @@ for(let i = 0; i < 1000; i++){
 
 console.log(users)
 
+const birthday = (date1, date2) => {
+    let D_1 = date1.split('/');
+    let D_2 = date2.split('/');
+    let d1 = new Date(D_1[2], parseInt(D_1[1]) - 1, D_1[0]);
+    let d2 = new Date(D_2[2], parseInt(D_2[1]) - 1, D_2[0]);
+    let response = [];
+    for(let i = 0; i < users.length; i++){
+        if(users[i].birthdayDate > d1 && users[i].birthdayDate < d2){
+            response.push(users[i])
+        }
+    }
+    console.log(response)
+}
 
-
-const sortBy
+const sortBy = () => {
+    
+}
